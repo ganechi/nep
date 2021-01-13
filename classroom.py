@@ -56,23 +56,6 @@ def course_list(classroom):
             except:
                 print(course['id'] + "：" + course['name']+ " / " )
 
-# 【O20】講義一覧
-def o20_course_list(classroom):
-    # Call the Classroom API
-    results = classroom.courses().list().execute()
-    courses = results.get('courses', [])
-
-    if not courses:
-        print('No courses found.')
-    else:
-        print('Courses ('+str(len(courses))+'):')
-        for course in courses:
-            try :
-                if('組込みシステム基礎コース' in course['section']):
-                    print(course['id'] + "：" + course['name']+ " / " + course['section'])
-            except:
-                pass
-
 # 生徒の講義一覧
 def course_list_by_student(classroom,userid):
     # Call the Classroom API
@@ -128,22 +111,6 @@ def students_list(classroom,courseid):
 
     # 招待中の情報
     inivitation_list_by_courseid(classroom,courseid)
-
-# 【O20】生徒一覧
-def o20_students_list(classroom):
-    students_list(classroom,'230403525081')
-    students_list(classroom,'230051941395')
-    students_list(classroom,'230022474745')
-    students_list(classroom,'230051008512')
-    students_list(classroom,'229954576298')
-    students_list(classroom,'229954976188')
-    students_list(classroom,'230059243339')
-    students_list(classroom,'205940239856')
-    students_list(classroom,'230136055474')
-    students_list(classroom,'230171281123')
-    students_list(classroom,'230166326828')
-    students_list(classroom,'230154766082')
-    students_list(classroom,'230172277125')
 
 # useridからユーザー情報出力
 def userprofile(classroom,userid):
@@ -219,31 +186,10 @@ def delete_invitation(classroom,id):
     except googleapiclient.errors.HttpError :
         print(usermail+' is not invited of course '+courseid)
 
-# 【O20】全講義招待
-def o20_invitation(classroom,usermail):
-    invitation(classroom,usermail,'230403525081')
-    invitation(classroom,usermail,'230051941395')
-    invitation(classroom,usermail,'230022474745')
-    invitation(classroom,usermail,'230051008512')
-    invitation(classroom,usermail,'229954576298')
-    invitation(classroom,usermail,'229954976188')
-    invitation(classroom,usermail,'230059243339')
-    invitation(classroom,usermail,'205940239856')
-    invitation(classroom,usermail,'230136055474')
-    invitation(classroom,usermail,'230171281123')
-    invitation(classroom,usermail,'230166326828')
-    invitation(classroom,usermail,'230154766082')
-    invitation(classroom,usermail,'230172277125')
-
 if __name__ == '__main__':
     # oauth Classroom API
     classroom = google_class_init()
     #course_list(classroom)
-    #o20_students_list(classroom)
-    #students_list(classroom,'230403525081')
-    #inivitation_list_by_courseid(classroom,'230403525081')
-    #invitation_list_by_userId(classroom,'108759399047929710193')
-    #invitation(classroom,'test.student@enpit-pro-emb.jp','230403525081')
 
     LIST = ['~@enpit-pro-emb.jp']
 
@@ -257,5 +203,3 @@ if __name__ == '__main__':
     #
     # for id in ID:
     #     delete_invitation(classroom,id)
-
-    #     o20_invitation(classroom,mail)
